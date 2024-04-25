@@ -32,44 +32,6 @@ cURL http://127.0.0.1:8000/status/job_000
 
 The APIs are implemented in a way where `20%` of the submitted jobs encounter an error when attempting to process. For such jobs (that encounter an error), we can expect the `/status` API to return `{"result": "error"}`.
 
-### Using the client library
-
-For detailed information regarding the client library, please refer to its specific [README](client_library/README.md).
-
-1. Make sure that the [server](README.md#running-the-server-locally) is running locally.
-
-2. Import the library:
-
-```python
-from translate_video.translate_video import TranslateVideo
-
-# Implementation...
-```
-
-3. Create an instance of the `TranslateVideo` class:
-
-```python
-video_translation_job = TranslateVideo(
-    job_id="TEST_JOB", # ID of the job
-    delay_seconds=15, # Attribute indicating the time (seconds) it takes to process the job
-    polling_interval_seconds=3, # Seconds between successive calls to the GET /status API
-    timeout_seconds=60, # Seconds to wait for the job to process before returning the status of the job
-)
-```
-
-4. Submit the job:
-
-```python
-video_translation_job.submit()
-```
-
-5. Get the status of the job:
-
-```python
-status = video_translation_job.get_status() # Will run until the job is completed or the timeout seconds has elapsed
-print(status) # {"result": "completed"}
-```
-
 ## API Signatures
 
 ### Base URL
@@ -106,6 +68,50 @@ Example Response:
 
 ```json
 { "result": "completed" }
+```
+
+### API Docs
+
+When the server is running, navigating to `http://127.0.0.1:8000/docs` OR `http://127.0.0.1:8000/redoc` will take you to the API Docs' page, where there's a sandbox for testing the endpoints.
+
+Alternatively, the JSON version of the API Docs can be found [here](openapi.json).
+
+### Using the client library
+
+For detailed information regarding the client library, please refer to its specific [README](client_library/README.md).
+
+1. Make sure that the [server](README.md#running-the-server-locally) is running locally.
+
+2. Import the library:
+
+```python
+from translate_video.translate_video import TranslateVideo
+
+# Implementation...
+```
+
+3. Create an instance of the `TranslateVideo` class:
+
+```python
+video_translation_job = TranslateVideo(
+    job_id="TEST_JOB", # ID of the job
+    delay_seconds=15, # Attribute indicating the time (seconds) it takes to process the job
+    polling_interval_seconds=3, # Seconds between successive calls to the GET /status API
+    timeout_seconds=60, # Seconds to wait for the job to process before returning the status of the job
+)
+```
+
+4. Submit the job:
+
+```python
+video_translation_job.submit()
+```
+
+5. Get the status of the job:
+
+```python
+status = video_translation_job.get_status() # Will run until the job is completed or the timeout seconds has elapsed
+print(status) # {"result": "completed"}
 ```
 
 ## Running the integration test
