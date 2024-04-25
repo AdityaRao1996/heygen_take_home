@@ -1,0 +1,11 @@
+colorama==0.4.6
+fastapi==0.110.2
+httpx==0.27.0 # For running server/tests
+pylint==3.1.0
+pytest==8.1.1
+pytest-mock==3.14.0
+requests==2.31.0
+setuptools==69.5.1 # For creating an installable python library
+twine==5.0.0 # For creating an installable python library
+uvicorn==0.29.0
+wheel==0.43.0 # For creating an installable python library
